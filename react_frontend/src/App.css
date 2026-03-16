@@ -1,104 +1,351 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --rk-blue: #3b82f6;
+  --rk-cyan: #06b6d4;
+  --rk-accent: #06b6d4;
+  --rk-bg-main: #f9fafb;
+  --rk-surface: #ffffff;
+  --rk-text: #111827;
+  --rk-text-secondary: #64748b;
+  --rk-error: #EF4444;
+  --rk-shadow: 0 1.5px 10px 0px rgba(59, 130, 246, .07);
+  --rk-radius: 13px;
+  --rk-navbar-height: 64px;
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --rk-bg-main: #1c2233;
+  --rk-surface: #171923;
+  --rk-text: #f9fafb;
+  --rk-text-secondary: #b3c7e6;
+  --rk-shadow: 0 3px 14px 0px rgba(6, 182, 212, .13);
 }
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+/* App Shell Layout */
+.rk-app-shell {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+  background: var(--rk-bg-main);
   display: flex;
   flex-direction: column;
+}
+
+.rk-navbar {
+  height: var(--rk-navbar-height);
+  background: linear-gradient(90deg, var(--rk-blue) 0%, var(--rk-cyan) 100%);
+  color: #fff;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  justify-content: space-between;
+  padding: 0 1.4rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px 0 rgba(59, 130, 246, 0.13);
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.rk-navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.66em;
+  font-family: 'Inter', 'Fira Mono', monospace;
+  letter-spacing: 0.07em;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.rk-navbar__icon {
+  font-size: 1.7rem;
+}
+
+.rk-navbar__theme {
+  background: none;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+  color: inherit;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.67em 1em;
+  border-radius: var(--rk-radius);
+  background: rgba(255,255,255,0.09);
+  transition: background 0.24s;
+}
+.rk-navbar__theme:hover,
+.rk-navbar__theme:focus {
+  outline: none;
+  background: rgba(6, 182, 212, 0.19);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+/* Main Content */
+.rk-body {
+  flex: 1 1 0%;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 660px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 0;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+/* List/Search/Actions */
+.rk-main-content {
+  background: var(--rk-surface);
+  border-radius: var(--rk-radius);
+  margin: 2.4rem 0 1.5rem 0;
+  box-shadow: var(--rk-shadow);
+  padding: 2.2rem 2.0rem 2rem 2.0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.rk-list-actions {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.rk-search {
+  flex: 1;
+  padding: 0.85em 1em;
+  border: 2px solid var(--rk-blue);
+  border-radius: var(--rk-radius);
+  font-size: 1.07rem;
+  font-family: inherit;
+  background: var(--rk-bg-main);
+  color: var(--rk-text);
+  outline: none;
+  transition: border 0.2s;
+}
+.rk-search:focus {
+  border-color: var(--rk-cyan);
+}
+
+.rk-create-btn,
+.rk-save-btn,
+.rk-cancel-btn,
+.rk-note-edit,
+.rk-note-delete {
+  background: var(--rk-blue);
+  color: #fff;
+  border: none;
+  border-radius: var(--rk-radius);
+  font-size: 1rem;
+  padding: 0.55em 1.21em;
+  font-family: inherit;
+  margin: 0;
+  font-weight: 600;
+  box-shadow: 0 1px 8px 0 rgba(59,130,246,0.12);
+  cursor: pointer;
+  transition: background 0.21s, color 0.13s;
+}
+.rk-create-btn {
+  background: var(--rk-cyan);
+  margin-left: 0.1rem;
+}
+.rk-create-btn:hover,
+.rk-save-btn:hover,
+.rk-note-edit:hover {
+  background: var(--rk-blue);
+  opacity: 0.92;
+}
+
+.rk-cancel-btn {
+  background: #fff;
+  color: var(--rk-blue);
+  border: 1.3px solid var(--rk-blue);
+  margin-left: 0.88em;
+}
+.rk-cancel-btn:hover {
+  background: var(--rk-blue);
+  color: #fff;
+}
+
+.rk-note-edit {
+  padding: 0.32em 0.7em;
+}
+.rk-note-edit:hover {
+  background: var(--rk-cyan);
+}
+.rk-note-delete {
+  margin-left: 0.7em;
+  background: var(--rk-error);
+  color: #fff;
+  padding: 0.32em 0.7em;
+}
+.rk-note-delete:hover {
+  filter: brightness(1.17);
+}
+
+.rk-note-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.rk-empty-msg {
+  text-align: center;
+  color: var(--rk-text-secondary);
+  font-size: 1.2rem;
+  padding: 1.5rem 0;
+  opacity: 0.72;
+}
+
+/* Note Card (List Item) */
+.rk-note-card {
+  background: var(--rk-bg-main);
+  border: 1.3px solid var(--rk-blue);
+  border-radius: var(--rk-radius);
+  box-shadow: 0 2.5px 10px 0 rgba(59,130,246,0.06);
+  padding: 0.85em 1.10em 1.07em 1.15em;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  transition: box-shadow 0.16s, border 0.15s;
+  outline: none;
+}
+.rk-note-card:focus,
+.rk-note-card--active {
+  border: 2px solid var(--rk-cyan);
+  box-shadow: 0 4.5px 20px 0 rgba(6,182,212,0.23);
+}
+.rk-note-title {
+  font-size: 1.09em;
+  font-weight: 700;
+  color: var(--rk-text);
+}
+.rk-note-preview {
+  color: var(--rk-text-secondary);
+  font-size: 0.97em;
+  margin-bottom: 0.27em;
+}
+.rk-note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.94em;
+  margin-top: 0.08em;
+}
+.rk-note-date {
+  color: var(--rk-text-secondary);
+  opacity: 0.78;
+}
+.rk-note-actions {
+  display: flex;
+}
+
+/* Edit/Create Form */
+.rk-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.11em;
+}
+.rk-label {
+  font-weight: 600;
+  font-size: 1.02em;
+  margin-bottom: 0.19em;
+  color: var(--rk-blue);
+}
+.rk-input {
+  width: 100%;
+  padding: 0.66em 0.98em;
+  border: 1.2px solid var(--rk-blue);
+  border-radius: var(--rk-radius);
+  font-size: 1rem;
+  background: var(--rk-bg-main);
+  color: var(--rk-text);
+  font-family: inherit;
+  transition: border 0.17s;
+}
+.rk-input:focus {
+  outline: none;
+  border: 1.5px solid var(--rk-cyan);
+}
+.rk-input--area {
+  resize: vertical;
+  font-size: 1rem;
+  font-family: inherit;
+}
+.rk-edit-actions {
+  display: flex;
+  gap: 1.2em;
+  margin-top: 0.4em;
+  align-items: center;
+}
+
+/* View Panel (Viewing note in readonly mode) */
+.rk-view-panel {
+  background: var(--rk-bg-main);
+  border-radius: var(--rk-radius);
+  border: 1.3px solid var(--rk-blue);
+  box-shadow: 0 2.5px 12px 0 rgba(59,130,246,0.08);
+  padding: 1.5em 1.5em 2em 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.96rem;
+}
+.rk-view-title {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: var(--rk-blue);
+  margin-bottom: 0.23em;
+}
+.rk-view-content {
+  color: var(--rk-text);
+  font-size: 1.09em;
+  white-space: pre-wrap;
+  min-height: 3em;
+  margin-bottom: 0.41em;
+}
+.rk-view-dates {
+  font-size: 0.93em;
+  color: var(--rk-text-secondary);
+  opacity: 0.7;
+}
+
+/* Footer */
+.rk-footer {
+  width: 100%;
+  text-align: center;
+  padding: 1.15em 0 1em 0;
+  color: var(--rk-text-secondary);
+  background: transparent;
+  font-size: 1rem;
+  margin-top: auto;
+  opacity: 0.83;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .rk-body, .rk-main-content {
+    max-width: 99vw;
   }
-  to {
-    transform: rotate(360deg);
+  .rk-main-content {
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
   }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+@media (max-width: 600px) {
+  .rk-navbar {
+    height: 54px;
+    font-size: 1rem;
+    padding: 0 0.6rem;
   }
+  .rk-navbar__title {
+    font-size: 0.98em;
+  }
+  .rk-main-content {
+    padding: 1.3rem 0.34rem 1.1rem 0.34rem;
+    margin: 1.2rem 0 1.12rem 0;
+  }
+  .rk-body {
+    padding: 0;
+    min-width: 0;
+  }
+}
+
+/* Enable smooth transitions between themes */
+:root, [data-theme="dark"] {
+  transition: background 0.4s, color 0.4s;
 }
